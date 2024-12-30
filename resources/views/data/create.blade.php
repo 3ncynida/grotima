@@ -16,17 +16,20 @@
     <div>
         <label for="marketplace">Marketplace:</label>
         <select name="marketplace" id="marketplace" required>
-            <option value="Lazada">Lazada</option>
-            <option value="Shopee">Shopee</option>
-            <option value="Tokopedia">Tokopedia</option>
+        <option value="">Select Marketplace</option>
+        @foreach ($marketplace as $m)            
+        <option value="{{ $m->id }}" @if (old('id')==$m->id) selected @endif>{{ $m->marketplace_name }}</option>
+        @endforeach
         </select>
     </div>
 
     <div>
         <label for="ekspedisi">Ekspedisi:</label>
         <select name="ekspedisi" id="ekspedisi" required>
-            <option value="Ninja">Ninja</option>
-            <option value="JNT">JNT</option>
+        <option value="">Select ekspedisi</option>
+        @foreach ($ekspedisi as $e)            
+        <option value="{{ $e->id }}" @if (old('id')==$e->id) selected @endif>{{ $e->ekspedisi_name }}</option>
+        @endforeach
         </select>
     </div>
 

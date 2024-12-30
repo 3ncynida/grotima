@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Data;
 use App\User;
 use App\Stok;
+use App\Marketplace;
+use App\Ekspedisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +19,15 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = Data::with('user', 'stok')->get();
+        $data = Data::with('user', 'stok', 'marketplace', 'ekspedisi')
+                    ->orderBy('created_at', 'desc')
+                    ->get()
+                    ->groupBy(function($date) {
+                        return \Carbon\Carbon::parse($date->created_at)->format('F Y'); // grouping by months
+                    });
+
         return view('data.index', compact('data'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -29,9 +36,11 @@ class DataController extends Controller
     public function create()
     {
         $user = User::all();
+        $marketplace = Marketplace::all();
+        $ekspedisi = Ekspedisi::all();
         $stok = Stok::orderBy('created_at', 'desc')->first();
 
-        return view('data.create', compact('user', 'stok'));
+        return view('data.create', compact('user','marketplace', 'ekspedisi', 'stok'));
     }
 
     /**
@@ -44,8 +53,8 @@ class DataController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
-            'marketplace' => 'required|in:Lazada,Shopee,Tokopedia',
-            'ekspedisi' => 'required|in:Ninja,JNT',
+            'marketplace' => 'required',
+            'ekspedisi' => 'required',
             'stok' => 'required|integer|min:0',
             'stok_terambil' => 'required|integer|min:0|max:' . $request->stok,
         ]);
@@ -59,8 +68,10 @@ class DataController extends Controller
             'stok_terambil' => $request->stok_terambil,
         ]);
 
-        // Tambahkan stok_id dan user_id ke data yang divalidasi
+        // Tambahkan stok_id, marketplace_id, ekspedisi_id, dan user_id ke data yang divalidasi
         $validated['stok_id'] = $stok->id;
+        $validated['marketplace_id'] = $request->marketplace;
+        $validated['ekspedisi_id'] = $request->ekspedisi;
         $validated['user_id'] = Auth::id();
 
         // Menyimpan data ke database
