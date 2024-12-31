@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Marketplace;
@@ -7,79 +6,49 @@ use Illuminate\Http\Request;
 
 class MarketplaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $market = Marketplace::all();
+        return view('data.marketplaces.index', compact('market'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('data.marketplaces.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'marketplace_name' => 'required|string|max:255',
+        ]);
+
+        Marketplace::create($request->all());
+
+        return redirect()->route('marketplaces.index')->with('success', 'Marketplace berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Marketplace  $marketplace
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Marketplace $marketplace)
+    public function edit($id)
     {
-        //
+        $marketplace = Marketplace::findOrFail($id);
+        return view('data.marketplaces.edit', compact('marketplace'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Marketplace  $marketplace
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Marketplace $marketplace)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'marketplace_name' => 'required|string|max:255',
+        ]);
+
+        $marketplace = Marketplace::findOrFail($id);
+        $marketplace->update($request->all());
+
+        return redirect()->route('marketplaces.index')->with('success', 'Marketplace berhasil diperbarui.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Marketplace  $marketplace
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Marketplace $marketplace)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Marketplace  $marketplace
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Marketplace $marketplace)
-    {
-        //
+        Marketplace::where('id', $id)->delete();
+        return redirect()->route('marketplaces.index')->with('success', 'Marketplace berhasil dihapus.');
     }
 }

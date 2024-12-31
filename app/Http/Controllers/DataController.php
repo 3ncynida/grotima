@@ -12,43 +12,26 @@ use Illuminate\Support\Facades\Auth;
 
 class DataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $data = Data::with('user', 'stok', 'marketplace', 'ekspedisi')
-                    ->orderBy('created_at', 'desc')
-                    ->get()
-                    ->groupBy(function($date) {
-                        return \Carbon\Carbon::parse($date->created_at)->format('F Y'); // grouping by months
-                    });
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy(function ($date) {
+                return \Carbon\Carbon::parse($date->created_at)->format('F Y'); // grouping by months
+            });
 
-        return view('data.index', compact('data'));
+        return view('note.index', compact('data'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = User::all();
         $marketplace = Marketplace::all();
         $ekspedisi = Ekspedisi::all();
-        $stok = Stok::orderBy('created_at', 'desc')->first();
+        $stok = Stok::orderBy('created_at', 'desc')->first(); // Ambil stok terbaru
 
-        return view('data.create', compact('user','marketplace', 'ekspedisi', 'stok'));
+        return view('note.create', compact('user', 'marketplace', 'ekspedisi', 'stok'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // Validasi input
@@ -81,5 +64,48 @@ class DataController extends Controller
         return redirect()->route('data.index')->with('success', 'Data berhasil disimpan.');
     }
 
-    // Methods lainnya...
+    public function edit($id)
+    {
+        $data = Data::findOrFail($id);
+        $marketplace = Marketplace::all();
+        $ekspedisi = Ekspedisi::all();
+        $stok = Stok::orderBy('created_at', 'desc')->get();
+
+        return view('note.edit', compact('data', 'marketplace', 'ekspedisi', 'stok'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi input
+        $validated = $request->validate([
+            'marketplace' => 'required',
+            'ekspedisi' => 'required',
+            'jumlah_stok' => 'required|integer|min:0',
+            'stok_terambil' => 'nullable|integer|min:0',
+        ]);
+
+        // Update stok
+        $stok = Stok::findOrFail($request->stok_id);
+        $stok->update([
+            'jumlah_stok' => $request->jumlah_stok,
+            'stok_terambil' => $request->stok_terambil,
+        ]);
+
+        // Update data
+        $data = Data::findOrFail($id);
+        $data->update([
+            'marketplace_id' => $request->marketplace,
+            'ekspedisi_id' => $request->ekspedisi,
+            'stok_id' => $stok->id,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('data.index')->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        Data::where('data_id', $id)->delete();
+        return redirect()->route('data.index')->with('success', 'Data berhasil dihapus.');
+    }
 }
