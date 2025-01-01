@@ -6,11 +6,11 @@
     </button>
 
     <!-- Page Heading -->
-    <div class="navbar-nav ml-auto">
-            @if (Route::currentRouteName() === 'data.index')
-        <h1 class="h5 mb-0 font-weight-bold text-primary">Note</h1>
+    <div class="navbar-nav mx-auto">
+        @if (Route::currentRouteName() === 'data.index')
+            <h1 class="h5 mb-0 font-weight-bold text-primary">NOTE</h1>
         @else
-        <h1 class="h5 mb-0 font-weight-bold text-primary">Data</h1>
+            <h1 class="h5 mb-0 font-weight-bold text-primary">DATA</h1>
         @endif
     </div>
 

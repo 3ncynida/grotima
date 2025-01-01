@@ -11,18 +11,26 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Account
+    </div>
+
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link">
-            <i class="fas fa-fw fa-fire"></i>
+            <i class="fas fa-fw fa-user"></i>
             <span>{{ Auth::user()->name }}</span></a>
-            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fas fa-fw fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+        <a class="nav-link" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-fw fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </li>
 
     <!-- Divider -->
@@ -35,7 +43,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Addons
+        Pages
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -48,16 +56,16 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data :</h6>
-                <a class="collapse-item" href={{route('marketplaces.index')}}>Marketplace</a>
-                <a class="collapse-item" href={{route('ekspedisi.index')}}>Ekspedisi</a>
-                <a class="collapse-item" href={{route('stok.index')}}>Stok</a>
+                <a class="collapse-item" href={{ route('marketplaces.index') }}>Marketplace</a>
+                <a class="collapse-item" href={{ route('ekspedisi.index') }}>Ekspedisi</a>
+                <a class="collapse-item" href={{ route('stok.index') }}>Stok</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item {{ Request::is('data') ? 'active' : '' }}">
-        <a class="nav-link" href={{route('data.index')}}>
+        <a class="nav-link" href={{ route('data.index') }}>
             <i class="fas fa-fw fa-table"></i>
             <span>Note</span></a>
     </li>

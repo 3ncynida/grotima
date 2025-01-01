@@ -7,6 +7,7 @@ use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\EksepedisiController;
 use App\Http\Controllers\StokController;
 
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.proses');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');

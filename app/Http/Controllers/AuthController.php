@@ -52,8 +52,7 @@ class AuthController extends Controller
         // Login pengguna baru
         Auth::login($user);
 
-        // Redirect ke dashboard
-        return redirect()->intended('dashboard');
+        return redirect()->route('login');
     }
 
     public function logout()
