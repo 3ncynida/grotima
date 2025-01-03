@@ -30,6 +30,27 @@
     </style>
 </head>
 <body>
+    <!-- Modal -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">Enter Special Password For Access This Page</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="specialPassword">Special Password:</label>
+                        <input type="password" id="specialPassword" class="form-control">
+                        <span id="passwordError" class="text-danger" style="display: none;">Unauthorized access.</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="submitPassword">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -78,5 +99,23 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var specialPassword = 'tirtototir'; // Ganti dengan password khusus Anda
+            $('#passwordModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            $('#submitPassword').click(function() {
+                var userPassword = $('#specialPassword').val();
+                if (userPassword !== specialPassword) {
+                    $('#passwordError').show();
+                } else {
+                    $('#passwordModal').modal('hide');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

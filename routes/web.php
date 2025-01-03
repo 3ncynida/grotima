@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('note', [DataController::class, 'index'])->name('data.index');
     Route::get('note/create', [DataController::class, 'create'])->name('data.create');
     Route::post('note', [DataController::class, 'store'])->name('data.store');
-    Route::get('note/{id}/edit', [DataController::class, 'edit'])->name('data.edit'); // Rute untuk mengedit data
+    Route::get('note/{id?}/edit', [DataController::class, 'edit'])->name('data.edit'); // Rute untuk mengedit data
     Route::put('note/{id}', [DataController::class, 'update'])->name('data.update'); // Rute untuk memperbarui data
     Route::delete('note/{id}', [DataController::class, 'destroy'])->name('data.destroy');
 

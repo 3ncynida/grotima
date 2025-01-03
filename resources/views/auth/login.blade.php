@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    @include('layouts.header')
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -60,6 +59,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </form>
+                        <div class="text-center mt-3">
+                            <a href="{{ route('register') }}">Don't have an account? Register here</a>
+                        </div>
                     </div>
                 </div>
             </div>

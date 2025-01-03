@@ -22,7 +22,7 @@
                                 <th>Admin</th>
                                 <th>Jumlah Stok</th>
                                 <th>Stok Diambil</th>
-                                <th>Waktu</th>
+                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -35,7 +35,7 @@
                                 <td>{{ $d->user->name }}</td>
                                 <td>{{ $d->stok->jumlah_stok + $d->stok->stok_terambil }}</td> <!-- Menampilkan jumlah stok sebelumnya -->
                                 <td>{{ $d->stok->stok_terambil }}</td>
-                                <td>{{ $d->created_at->format('d M Y H:i') }}</td>
+                                <td>{{ $d->created_at->format('d M Y') }}</td>
                                 <td>
                                     <a href="{{ route('data.edit', $d->data_id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <form action="{{ route('data.destroy', $d->data_id) }}" method="POST" style="display:inline-block;">
