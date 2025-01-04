@@ -48,7 +48,7 @@
 
                         <div class="form-group">
                             <label for="stok">Stok:</label>
-                            <input type="number" name="jumlah_stok" id="jumlah_stok" class="form-control" value="{{ $data->stok->jumlah_stok }}" required>
+                            <input type="number" name="jumlah_stok" id="jumlah_stok" class="form-control" value="{{ $data->stok->jumlah_stok }}" readonly>
                         </div>
 
                         <div class="form-group">
