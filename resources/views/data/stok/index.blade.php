@@ -22,7 +22,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->jumlah_stok }}</td>
                 <td>{{ $item->stok_terambil ?? 'None' }}</td>
-                <td>{{ $item->created_at->format('d M Y H:i') }}</td>
+                <td>{{ $item->created_at->format('d M Y') }}</td>
                 <td>
                     <a href="{{ route('stok.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('stok.destroy', $item->id) }}" method="POST" style="display:inline-block;">
