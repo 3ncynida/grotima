@@ -48,6 +48,11 @@
                         <div class="form-group">
                             <label for="stok">Stok:</label>
                             <input type="number" name="stok" id="stok" class="form-control" value="{{ $stok->jumlah_stok }}" readonly>
+                        @if ($stok->jumlah_stok == 0)
+                            <div class="alert alert-warning">
+                                <strong>Tolong tambahkan stok</strong>
+                            </div>
+                        @endif
                         </div>
 
                         <div class="form-group">

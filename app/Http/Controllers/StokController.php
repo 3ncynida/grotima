@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Stok;
@@ -14,7 +15,8 @@ class StokController extends Controller
 
     public function create()
     {
-        return view('data.stok.create');
+        $stok = Stok::latest()->first();
+        return view('data.stok.create', compact('stok'));
     }
 
     public function store(Request $request)

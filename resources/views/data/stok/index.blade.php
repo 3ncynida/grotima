@@ -12,7 +12,7 @@
                 <th>No</th>
                 <th>Jumlah Stok</th>
                 <th>Stok Diambil</th>
-                <th>Waktu</th>
+                <th>Tanggal</th>
                 <th>Actions</th>
             </tr>
         </thead>

@@ -27,7 +27,7 @@
 
                         <div class="form-group">
                             <label for="jumlah_stok">Tambah Jumlah Stok:</label>
-                            <input type="number" name="jumlah_stok" id="jumlah_stok" class="form-control" value="{{ old('jumlah_stok') }}" required>
+                            <input type="number" name="jumlah_stok" id="jumlah_stok" class="form-control" value="{{ $stok ? $stok->jumlah_stok : '' }}" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>

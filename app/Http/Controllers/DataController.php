@@ -41,25 +41,30 @@ class DataController extends Controller
             'stok' => 'required|integer|min:0',
             'stok_terambil' => 'required|integer|min:0|max:' . $request->stok,
         ]);
-
+    
         // Hitung jumlah_stok
         $jumlah_stok = $request->stok - $request->stok_terambil;
-
+    
+        // Check if jumlah_stok is 0
+        if ($jumlah_stok == 0) {
+            return redirect()->back()->withErrors(['stok' => 'Jumlah stok tidak boleh 0.']);
+        }
+    
         // Buat stok baru
         $stok = Stok::create([
             'jumlah_stok' => $jumlah_stok,
             'stok_terambil' => $request->stok_terambil,
         ]);
-
+    
         // Tambahkan stok_id, marketplace_id, ekspedisi_id, dan user_id ke data yang divalidasi
         $validated['stok_id'] = $stok->id;
         $validated['marketplace_id'] = $request->marketplace;
         $validated['ekspedisi_id'] = $request->ekspedisi;
         $validated['user_id'] = Auth::id();
-
+    
         // Menyimpan data ke database
         $data = Data::create($validated);
-
+    
         // Redirect atau response
         return redirect()->route('data.index')->with('success', 'Data berhasil disimpan.');
     }
