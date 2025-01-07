@@ -23,7 +23,6 @@
                                 <th>Ekspedisi</th>
                                 <th>Dropshipper</th>
                                 <th>Stok Diambil</th>
-                                <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -35,7 +34,6 @@
                                 <td>{{ $d->ekspedisi->ekspedisi_name }}</td>
                                 <td>{{ $d->dropshipper->nama_dropshipper }}</td>
                                 <td>{{ $d->stok_terambil }}</td> <!-- Menampilkan jumlah stok sebelumnya -->
-                                <td>{{ $d->created_at->format('d M Y') }}</td>
                                 <td>
                                     <a href="{{ route('data.edit', $d->data_id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <form action="{{ route('data.destroy', $d->data_id) }}" method="POST" style="display:inline-block;">

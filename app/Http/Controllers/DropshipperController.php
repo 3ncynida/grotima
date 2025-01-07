@@ -27,4 +27,30 @@ class DropshipperController extends Controller
 
         return redirect()->route('dropshipper.index')->with('success', 'Dropshipper berhasil ditambahkan.');
     }
+
+    public function edit($id)
+    {
+        $dropshipper = Dropshipper::findOrFail($id);
+        return view('dropshipper.edit', compact('dropshipper'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_dropshipper' => 'required|string|max:255',
+        ]);
+
+        $dropshipper = Dropshipper::findOrFail($id);
+        $dropshipper->update($request->all());
+
+        return redirect()->route('dropshipper.index')->with('success', 'Dropshipper berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $dropshipper = Dropshipper::findOrFail($id);
+        $dropshipper->delete();
+
+        return redirect()->route('dropshipper.index')->with('success', 'Dropshipper berhasil dihapus.');
+    }
 }

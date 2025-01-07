@@ -16,7 +16,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Dropshipper</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +25,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $dropshipper->nama_dropshipper }}</td>
                             <td>
-                                <!-- Add actions if needed -->
+                                <a href="{{ route('dropshipper.edit', $dropshipper->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('dropshipper.destroy', $dropshipper->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

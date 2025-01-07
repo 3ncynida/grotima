@@ -8,27 +8,7 @@
         <div class="sidebar-brand-text mx-3">Grotima</div>
     </a>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-    <div class="sidebar-heading">
-        Account
-    </div>
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Admin</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
