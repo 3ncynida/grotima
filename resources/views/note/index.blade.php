@@ -19,9 +19,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Seller</th>
                                 <th>Marketplace</th>
                                 <th>Ekspedisi</th>
-                                <th>Dropshipper</th>
                                 <th>Stok Diambil</th>
                                 <th>Aksi</th>
                             </tr>
@@ -30,9 +30,9 @@
                             @foreach ($records as $d)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $d->dropshipper->nama_dropshipper }}</td>
                                 <td>{{ $d->marketplace->marketplace_name }}</td>
                                 <td>{{ $d->ekspedisi->ekspedisi_name }}</td>
-                                <td>{{ $d->dropshipper->nama_dropshipper }}</td>
                                 <td>{{ $d->stok_terambil }}</td> <!-- Menampilkan jumlah stok sebelumnya -->
                                 <td>
                                     <a href="{{ route('data.edit', $d->data_id) }}" class="btn btn-warning btn-sm">Edit</a>
