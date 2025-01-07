@@ -22,15 +22,7 @@
     <li class="nav-item">
         <a class="nav-link">
             <i class="fas fa-fw fa-user"></i>
-            <span>{{ Auth::user()->name }}</span></a>
-        <a class="nav-link" href="{{ route('logout') }}"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-fw fa-sign-out-alt"></i>
-            <span>Logout</span>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+            <span>Admin</span></a>
     </li>
 
     <!-- Divider -->

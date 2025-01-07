@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Data;
-use App\User;
-use App\Stok;
 use App\Marketplace;
 use App\Ekspedisi;
 use App\Dropshipper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DataController extends Controller
 {
@@ -24,11 +21,7 @@ class DataController extends Controller
         if ($request->has('ekspedisi_id')) {
             $query->where('ekspedisi_id', $request->ekspedisi_id);
         }
-    
-        if ($request->has('user_id')) {
-            $query->where('user_id', $request->user_id);
-        }
-    
+
         $data = $query->orderBy('created_at', 'desc')->get()->groupBy(function($date) {
             return \Carbon\Carbon::parse($date->created_at)->format('d M Y'); // Group by date
         });
@@ -37,12 +30,11 @@ class DataController extends Controller
     }
     public function create()
     {
-        $user = User::all();
         $marketplace = Marketplace::all();
         $ekspedisi = Ekspedisi::all();
         $dropshipper = Dropshipper::all();
     
-        return view('note.create', compact('user', 'marketplace', 'ekspedisi', 'dropshipper'));
+        return view('note.create', compact('marketplace', 'ekspedisi', 'dropshipper'));
     }
     
     public function store(Request $request)
@@ -58,7 +50,6 @@ class DataController extends Controller
         // Tambahkan marketplace_id, ekspedisi_id, user_id, dropshipper_id, dan stok_terambil ke data yang divalidasi
         $validated['marketplace_id'] = $request->marketplace;
         $validated['ekspedisi_id'] = $request->ekspedisi;
-        $validated['user_id'] = Auth::id();
         $validated['dropshipper_id'] = $request->dropshipper;
     
         // Menyimpan data ke database
@@ -93,7 +84,6 @@ class DataController extends Controller
         $data->update([
             'marketplace_id' => $request->marketplace,
             'ekspedisi_id' => $request->ekspedisi,
-            'user_id' => auth()->id(),
             'dropshipper_id' => $request->dropshipper,
             'stok_terambil' => $request->stok_terambil, // Update stok_terambil in data table
         ]);
@@ -111,7 +101,6 @@ class DataController extends Controller
     {
         $marketplaces = Marketplace::all();
         $ekspedisis = Ekspedisi::all();
-        $admins = User::all();
         $dropshippers = Dropshipper::all();
     
         $query = Data::query();
@@ -122,10 +111,6 @@ class DataController extends Controller
     
         if ($request->has('ekspedisi_id') && $request->ekspedisi_id != '') {
             $query->where('ekspedisi_id', $request->ekspedisi_id);
-        }
-    
-        if ($request->has('user_id') && $request->user_id != '') {
-            $query->where('user_id', $request->user_id);
         }
     
         if ($request->has('dropshipper_id') && $request->dropshipper_id != '') {
@@ -141,6 +126,6 @@ class DataController extends Controller
                     ->orderBy('date', 'desc')
                     ->get();
     
-        return view('note.total-sales-per-day', compact('data', 'marketplaces', 'ekspedisis', 'admins', 'dropshippers'));
+        return view('note.total-sales-per-day', compact('data', 'marketplaces', 'ekspedisis', 'dropshippers'));
     }
 }

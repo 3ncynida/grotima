@@ -10,17 +10,12 @@ class Data extends Model
     protected $primaryKey = 'data_id';
 
     protected $fillable = [
-        'user_id',
         'marketplace_id',
         'ekspedisi_id',
         'dropshipper_id',
         'stok_terambil',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id'); // Relasi ke tabel users
-    }
 
     public function marketplace()
     {

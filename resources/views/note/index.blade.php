@@ -21,7 +21,6 @@
                                 <th>No</th>
                                 <th>Marketplace</th>
                                 <th>Ekspedisi</th>
-                                <th>Admin</th>
                                 <th>Dropshipper</th>
                                 <th>Stok Diambil</th>
                                 <th>Tanggal</th>
@@ -34,7 +33,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $d->marketplace->marketplace_name }}</td>
                                 <td>{{ $d->ekspedisi->ekspedisi_name }}</td>
-                                <td>{{ $d->user->name }}</td>
                                 <td>{{ $d->dropshipper->nama_dropshipper }}</td>
                                 <td>{{ $d->stok_terambil }}</td> <!-- Menampilkan jumlah stok sebelumnya -->
                                 <td>{{ $d->created_at->format('d M Y') }}</td>

@@ -33,10 +33,9 @@ class CreateDataTable extends Migration
     
         Schema::create('data', function (Blueprint $table) {
             $table->id('data_id');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key
             $table->foreignId('marketplace_id')->constrained('marketplaces')->onDelete('cascade');
             $table->foreignId('ekspedisi_id')->constrained('ekspedisi')->onDelete('cascade');
-            $table->foreignId('dropshipper_id')->constrained('dropshipper')->onDelete('cascade'); // Foreign key
+            $table->foreignId('dropshipper_id')->constrained('dropshippers')->onDelete('cascade'); // Foreign key
             $table->integer('stok_terambil'); // Move stok_terambil to data table
             $table->timestamps();
         });
@@ -52,6 +51,6 @@ class CreateDataTable extends Migration
         Schema::dropIfExists('data');
         Schema::dropIfExists('marketplaces');
         Schema::dropIfExists('ekspedisi');
-        Schema::dropIfExists('stok');
+        Schema::dropIfExists('dropshippers');
     }
 }

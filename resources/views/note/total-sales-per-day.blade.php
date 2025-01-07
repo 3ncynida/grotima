@@ -31,15 +31,6 @@
                         </select>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="user_id">Admin</label>
-                        <select name="user_id" id="user_id" class="form-control">
-                            <option value="">Select Admin</option>
-                            @foreach ($admins as $admin)
-                                <option value="{{ $admin->id }}" {{ request('user_id') == $admin->id ? 'selected' : '' }}>{{ $admin->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-2">
                         <label for="dropshipper_id">Dropshipper</label>
                         <select name="dropshipper_id" id="dropshipper_id" class="form-control">
                             <option value="">Select Dropshipper</option>
