@@ -1,3 +1,4 @@
+<!-- filepath: /C:/laragon/www/grotima/resources/views/note/create.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Create Note')
@@ -29,8 +30,8 @@
                             <label for="marketplace">Marketplace:</label>
                             <select name="marketplace" id="marketplace" class="form-control" required>
                                 <option value="">Select Marketplace</option>
-                                @foreach ($marketplace as $m)            
-                                <option value="{{ $m->id }}" @if (old('marketplace')==$m->id) selected @endif>{{ $m->marketplace_name }}</option>
+                                @foreach ($marketplace as $m)
+                                    <option value="{{ $m->id }}">{{ $m->marketplace_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -39,25 +40,25 @@
                             <label for="ekspedisi">Ekspedisi:</label>
                             <select name="ekspedisi" id="ekspedisi" class="form-control" required>
                                 <option value="">Select Ekspedisi</option>
-                                @foreach ($ekspedisi as $e)            
-                                <option value="{{ $e->id }}" @if (old('ekspedisi')==$e->id) selected @endif>{{ $e->ekspedisi_name }}</option>
+                                @foreach ($ekspedisi as $e)
+                                    <option value="{{ $e->id }}">{{ $e->ekspedisi_name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="stok">Stok:</label>
-                            <input type="number" name="stok" id="stok" class="form-control" value="{{ $stok->jumlah_stok }}" readonly>
-                        @if ($stok->jumlah_stok == 0)
-                            <div class="alert alert-warning">
-                                <strong>Tolong tambahkan stok</strong>
-                            </div>
-                        @endif
+                            <label for="stok_terambil">Stok Terambil:</label>
+                            <input type="number" name="stok_terambil" id="stok_terambil" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="stok_terambil">Stok Diambil:</label>
-                            <input type="number" name="stok_terambil" id="stok_terambil" class="form-control" value="{{ old('stok_terambil') }}" required>
+                            <label for="dropshipper">Dropshipper:</label>
+                            <select name="dropshipper" id="dropshipper" class="form-control" required>
+                                <option value="">Select Dropshipper</option>
+                                @foreach ($dropshipper as $d)
+                                    <option value="{{ $d->id }}">{{ $d->nama_dropshipper }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>

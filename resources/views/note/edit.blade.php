@@ -1,3 +1,4 @@
+<!-- filepath: /C:/laragon/www/grotima/resources/views/note/edit.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Edit Note')
@@ -30,8 +31,8 @@
                             <label for="marketplace">Marketplace:</label>
                             <select name="marketplace" id="marketplace" class="form-control" required>
                                 <option value="">Select Marketplace</option>
-                                @foreach ($marketplace as $m)            
-                                <option value="{{ $m->id }}" @if ($data->marketplace_id == $m->id) selected @endif>{{ $m->marketplace_name }}</option>
+                                @foreach ($marketplace as $m)
+                                    <option value="{{ $m->id }}" {{ $data->marketplace_id == $m->id ? 'selected' : '' }}>{{ $m->marketplace_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -40,23 +41,26 @@
                             <label for="ekspedisi">Ekspedisi:</label>
                             <select name="ekspedisi" id="ekspedisi" class="form-control" required>
                                 <option value="">Select Ekspedisi</option>
-                                @foreach ($ekspedisi as $e)            
-                                <option value="{{ $e->id }}" @if ($data->ekspedisi_id == $e->id) selected @endif>{{ $e->ekspedisi_name }}</option>
+                                @foreach ($ekspedisi as $e)
+                                    <option value="{{ $e->id }}" {{ $data->ekspedisi_id == $e->id ? 'selected' : '' }}>{{ $e->ekspedisi_name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="stok">Stok:</label>
-                            <input type="number" name="jumlah_stok" id="jumlah_stok" class="form-control" value="{{ $data->stok->jumlah_stok }}" readonly>
+                            <label for="stok_terambil">Stok Terambil:</label>
+                            <input type="number" name="stok_terambil" id="stok_terambil" class="form-control" value="{{ $data->stok_terambil }}" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="stok_terambil">Stok Diambil:</label>
-                            <input type="number" name="stok_terambil" id="stok_terambil" class="form-control" value="{{ $data->stok->stok_terambil }}" required>
+                            <label for="dropshipper">Dropshipper:</label>
+                            <select name="dropshipper" id="dropshipper" class="form-control" required>
+                                <option value="">Select Dropshipper</option>
+                                @foreach ($dropshipper as $d)
+                                    <option value="{{ $d->id }}" {{ $data->dropshipper_id == $d->id ? 'selected' : '' }}>{{ $d->nama_dropshipper }}</option>
+                                @endforeach
+                            </select>
                         </div>
-
-                        <input type="hidden" name="stok_id" value="{{ $data->stok_id }}">
 
                         <button type="submit" class="btn btn-primary btn-block">Update</button>
                     </form>

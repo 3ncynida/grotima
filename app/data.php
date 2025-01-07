@@ -11,19 +11,15 @@ class Data extends Model
 
     protected $fillable = [
         'user_id',
-        'stok_id',
         'marketplace_id',
         'ekspedisi_id',
+        'dropshipper_id',
+        'stok_terambil',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id'); // Relasi ke tabel users
-    }
-
-    public function stok()
-    {
-        return $this->belongsTo(Stok::class, 'stok_id', 'id'); // Relasi ke tabel stok
     }
 
     public function marketplace()
@@ -34,5 +30,9 @@ class Data extends Model
     public function ekspedisi()
     {
         return $this->belongsTo(Ekspedisi::class, 'ekspedisi_id', 'id'); // Relasi ke tabel ekspedisi
+    }
+    public function dropshipper()
+    {
+        return $this->belongsTo(Dropshipper::class, 'dropshipper_id', 'id'); // Relasi ke tabel dropshipper
     }
 }

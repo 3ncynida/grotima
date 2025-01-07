@@ -18,26 +18,28 @@ class CreateDataTable extends Migration
             $table->string('marketplace_name');
             $table->timestamps();
         });
+    
         Schema::create('ekspedisi', function (Blueprint $table) {
             $table->id();
             $table->string('ekspedisi_name');
             $table->timestamps();
         });
-        Schema::create('stok', function (Blueprint $table) {
+    
+        Schema::create('dropshippers', function (Blueprint $table) {
             $table->id();
-            $table->integer('jumlah_stok');
-            $table->integer('stok_terambil')->nullable();
-            $table->timestamps();   
+            $table->string('nama_dropshipper');
+            $table->timestamps();
         });
+    
         Schema::create('data', function (Blueprint $table) {
             $table->id('data_id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key
             $table->foreignId('marketplace_id')->constrained('marketplaces')->onDelete('cascade');
             $table->foreignId('ekspedisi_id')->constrained('ekspedisi')->onDelete('cascade');
-            $table->foreignId('stok_id')->constrained('stok')->onDelete('cascade'); // Foreign key
+            $table->foreignId('dropshipper_id')->constrained('dropshipper')->onDelete('cascade'); // Foreign key
+            $table->integer('stok_terambil'); // Move stok_terambil to data table
             $table->timestamps();
         });
-        
     }
 
     /**

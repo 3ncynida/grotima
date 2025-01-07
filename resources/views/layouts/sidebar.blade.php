@@ -53,14 +53,15 @@
             <i class="fas fa-fw fa-folder"></i>
             <span>Data</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Data :</h6>
-                <a class="collapse-item" href={{ route('marketplaces.index') }}>Marketplace</a>
-                <a class="collapse-item" href={{ route('ekspedisi.index') }}>Ekspedisi</a>
-                <a class="collapse-item" href={{ route('stok.index') }}>Stok</a>
-            </div>
-        </div>
+<!-- filepath: /C:/laragon/www/grotima/resources/views/layouts/sidebar.blade.php -->
+<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Data :</h6>
+        <a class="collapse-item" href={{ route('marketplaces.index') }}>Marketplace</a>
+        <a class="collapse-item" href={{ route('ekspedisi.index') }}>Ekspedisi</a>
+        <a class="collapse-item" href={{ route('dropshipper.index') }}>Dropshipper</a>
+    </div>
+</div>
     </li>
 
     <!-- Nav Item - Tables -->
